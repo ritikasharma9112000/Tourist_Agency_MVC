@@ -3,47 +3,130 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Tourist_Agency_MVC</title>
+    <title>@ViewData["Title"] - Tourist Agency</title>
+
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+
+    <!--
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+        -->
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Tourist_Agency_MVC</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                    <partial name="_LoginPartial" />
-                </div>
-            </div>
+<body id="top">
+    <!-- navigation -->
+  
+
+    <div class="wrapper row2">
+        <nav id="mainav" class="hoc clear">
+
+            <ul class="clear">
+                <li>
+                    <a class="active" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                </li>
+                <li>
+                    <a class="active" asp-area="" asp-controller="Activities" asp-action="Index">Activities</a>
+                </li>
+                <li>
+                    <a class="active" asp-area="" asp-controller="Agencies" asp-action="Index">Agencies</a>
+                </li>
+                <li>
+                    <a class="active" asp-area="" asp-controller="Bookings" asp-action="Index">Bookings</a>
+                </li>
+                <li>
+                    <a class="active" asp-area="" asp-controller="Customers" asp-action="Index">Customers</a>
+                </li>
+
+                <li>
+                    <a class="active" asp-area="" asp-controller="Packages" asp-action="Index">Packages</a>
+                </li>
+
+               
+
+            </ul>
+            <partial name="_LoginPartial" />
         </nav>
-    </header>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Tourist_Agency_MVC</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+                        </ul>
+                        <partial name="_LoginPartial" />
+                    </div>
+                </div>
+            </nav>
+        </header>
+        -->
+
+
+
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
+
+
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2021 - Tourist_Agency_MVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
+    <!-- JAVASCRIPTS -->
+    <script src="~/layout/scripts/jquery.min.js"></script>
+    <script src="~/layout/scripts/jquery.backtotop.js"></script>
+    <script src="~/layout/scripts/jquery.mobilemenu.js"></script>
+
+
+
+
+
+
+
+    <!--
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+        -->
 </body>
 </html>
