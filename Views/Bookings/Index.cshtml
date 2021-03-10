@@ -4,8 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Make It Meaning Full And Memorable.</h1>
-<img src="~/images/Tour_4.jpg" />
+<h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -14,11 +13,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Customer_Id)
+                @Html.DisplayNameFor(model => model.Customer)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Package_Id)
-                <a href="C:\Users\ritik\source\repos\ritikasharma9112000\Tourist_Agency_MVC\Views\_ViewImports.cshtml">C:\Users\ritik\source\repos\ritikasharma9112000\Tourist_Agency_MVC\Views\_ViewImports.cshtml</a>
+                @Html.DisplayNameFor(model => model.package)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Date_Of_Booking)
@@ -30,10 +28,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Customer_Id)
+                @Html.DisplayFor(modelItem => item.Customer.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Package_Id)
+                @Html.DisplayFor(modelItem => item.package.Id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Date_Of_Booking)

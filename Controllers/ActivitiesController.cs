@@ -54,7 +54,7 @@ namespace Tourist_Agency_MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Activity_Name,Activity_Duration,Activity_Available_Season,Activity_Special_Need,Activity_Address")] Activities activities)
+        public async Task<IActionResult> Create([Bind("Id,Activity_Name,Activity_Duration,Activity_Available_Season,Activity_Special_Need,Activity_Address")] Activity activities)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace Tourist_Agency_MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Activity_Name,Activity_Duration,Activity_Available_Season,Activity_Special_Need,Activity_Address")] Activities activities)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Activity_Name,Activity_Duration,Activity_Available_Season,Activity_Special_Need,Activity_Address")] Activity activities)
         {
             if (id != activities.Id)
             {

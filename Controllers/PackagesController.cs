@@ -22,7 +22,8 @@ namespace Tourist_Agency_MVC.Controllers
         // GET: Packages
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Packages.ToListAsync());
+            var databaseContext = _context.Packages.Include(p => p.Activity).Include(p => p.Agency);
+            return View(await databaseContext.ToListAsync());
         }
 
         // GET: Packages/Details/5
@@ -33,19 +34,23 @@ namespace Tourist_Agency_MVC.Controllers
                 return NotFound();
             }
 
-            var packages = await _context.Packages
+            var package = await _context.Packages
+                .Include(p => p.Activity)
+                .Include(p => p.Agency)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (packages == null)
+            if (package == null)
             {
                 return NotFound();
             }
 
-            return View(packages);
+            return View(package);
         }
 
         // GET: Packages/Create
         public IActionResult Create()
         {
+            ViewData["ActivityId"] = new SelectList(_context.Activities, "Id", "Id");
+            ViewData["AgencyId"] = new SelectList(_context.Agency, "Id", "Id");
             return View();
         }
 
@@ -54,15 +59,17 @@ namespace Tourist_Agency_MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Package_Price,Activity_Id,Agency_Id")] Packages packages)
+        public async Task<IActionResult> Create([Bind("Id,Package_Price,ActivityId,AgencyId")] Package package)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(packages);
+                _context.Add(package);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(packages);
+            ViewData["ActivityId"] = new SelectList(_context.Activities, "Id", "Id", package.ActivityId);
+            ViewData["AgencyId"] = new SelectList(_context.Agency, "Id", "Id", package.AgencyId);
+            return View(package);
         }
 
         // GET: Packages/Edit/5
@@ -73,12 +80,14 @@ namespace Tourist_Agency_MVC.Controllers
                 return NotFound();
             }
 
-            var packages = await _context.Packages.FindAsync(id);
-            if (packages == null)
+            var package = await _context.Packages.FindAsync(id);
+            if (package == null)
             {
                 return NotFound();
             }
-            return View(packages);
+            ViewData["ActivityId"] = new SelectList(_context.Activities, "Id", "Id", package.ActivityId);
+            ViewData["AgencyId"] = new SelectList(_context.Agency, "Id", "Id", package.AgencyId);
+            return View(package);
         }
 
         // POST: Packages/Edit/5
@@ -86,9 +95,9 @@ namespace Tourist_Agency_MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Package_Price,Activity_Id,Agency_Id")] Packages packages)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Package_Price,ActivityId,AgencyId")] Package package)
         {
-            if (id != packages.Id)
+            if (id != package.Id)
             {
                 return NotFound();
             }
@@ -97,12 +106,12 @@ namespace Tourist_Agency_MVC.Controllers
             {
                 try
                 {
-                    _context.Update(packages);
+                    _context.Update(package);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PackagesExists(packages.Id))
+                    if (!PackageExists(package.Id))
                     {
                         return NotFound();
                     }
@@ -113,7 +122,9 @@ namespace Tourist_Agency_MVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(packages);
+            ViewData["ActivityId"] = new SelectList(_context.Activities, "Id", "Id", package.ActivityId);
+            ViewData["AgencyId"] = new SelectList(_context.Agency, "Id", "Id", package.AgencyId);
+            return View(package);
         }
 
         // GET: Packages/Delete/5
@@ -124,14 +135,16 @@ namespace Tourist_Agency_MVC.Controllers
                 return NotFound();
             }
 
-            var packages = await _context.Packages
+            var package = await _context.Packages
+                .Include(p => p.Activity)
+                .Include(p => p.Agency)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (packages == null)
+            if (package == null)
             {
                 return NotFound();
             }
 
-            return View(packages);
+            return View(package);
         }
 
         // POST: Packages/Delete/5
@@ -139,13 +152,13 @@ namespace Tourist_Agency_MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var packages = await _context.Packages.FindAsync(id);
-            _context.Packages.Remove(packages);
+            var package = await _context.Packages.FindAsync(id);
+            _context.Packages.Remove(package);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PackagesExists(int id)
+        private bool PackageExists(int id)
         {
             return _context.Packages.Any(e => e.Id == id);
         }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Tourist_Agency_MVC.Models
 {
-    public class Activities
+    public class Activity
     {
         public int Id { get; set; }
         public string Activity_Name { get; set; }

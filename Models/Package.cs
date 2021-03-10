@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Tourist_Agency_MVC.Models
 {
-    public class Packages
+    public class Package
     {
         public int Id { get; set; }
         public decimal Package_Price { get; set; }
-        public int Activity_Id { get; set; }
-        public Activities Activity { get; set; }
-        public int Agency_Id { get; set; }
+        public int ActivityId { get; set; }
+        public Activity Activity { get; set; }
+        public int AgencyId { get; set; }
         public Agency Agency { get; set; }
 
 

@@ -14,7 +14,7 @@ namespace Tourist_Agency_MVC.Data
         {
         }
 
-        public DbSet<Tourist_Agency_MVC.Models.Activities> Activities { get; set; }
+        public DbSet<Tourist_Agency_MVC.Models.Activity> Activities { get; set; }
 
         public DbSet<Tourist_Agency_MVC.Models.Agency> Agency { get; set; }
 
@@ -22,6 +22,6 @@ namespace Tourist_Agency_MVC.Data
 
         public DbSet<Tourist_Agency_MVC.Models.Booking> Booking { get; set; }
 
-        public DbSet<Tourist_Agency_MVC.Models.Packages> Packages { get; set; }
+        public DbSet<Tourist_Agency_MVC.Models.Package> Packages { get; set; }
     }
 }

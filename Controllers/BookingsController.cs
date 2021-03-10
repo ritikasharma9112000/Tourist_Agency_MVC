@@ -22,7 +22,8 @@ namespace Tourist_Agency_MVC.Controllers
         // GET: Bookings
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Booking.ToListAsync());
+            var databaseContext = _context.Booking.Include(b => b.Customer).Include(b => b.package);
+            return View(await databaseContext.ToListAsync());
         }
 
         // GET: Bookings/Details/5
@@ -34,6 +35,8 @@ namespace Tourist_Agency_MVC.Controllers
             }
 
             var booking = await _context.Booking
+                .Include(b => b.Customer)
+                .Include(b => b.package)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (booking == null)
             {
@@ -46,6 +49,8 @@ namespace Tourist_Agency_MVC.Controllers
         // GET: Bookings/Create
         public IActionResult Create()
         {
+            ViewData["CustomerId"] = new SelectList(_context.Customer, "Id", "Id");
+            ViewData["PackageId"] = new SelectList(_context.Packages, "Id", "Id");
             return View();
         }
 
@@ -54,7 +59,7 @@ namespace Tourist_Agency_MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Customer_Id,Package_Id,Date_Of_Booking")] Booking booking)
+        public async Task<IActionResult> Create([Bind("Id,CustomerId,PackageId,Date_Of_Booking")] Booking booking)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +67,8 @@ namespace Tourist_Agency_MVC.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CustomerId"] = new SelectList(_context.Customer, "Id", "Id", booking.CustomerId);
+            ViewData["PackageId"] = new SelectList(_context.Packages, "Id", "Id", booking.PackageId);
             return View(booking);
         }
 
@@ -78,6 +85,8 @@ namespace Tourist_Agency_MVC.Controllers
             {
                 return NotFound();
             }
+            ViewData["CustomerId"] = new SelectList(_context.Customer, "Id", "Id", booking.CustomerId);
+            ViewData["PackageId"] = new SelectList(_context.Packages, "Id", "Id", booking.PackageId);
             return View(booking);
         }
 
@@ -86,7 +95,7 @@ namespace Tourist_Agency_MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Customer_Id,Package_Id,Date_Of_Booking")] Booking booking)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CustomerId,PackageId,Date_Of_Booking")] Booking booking)
         {
             if (id != booking.Id)
             {
@@ -113,6 +122,8 @@ namespace Tourist_Agency_MVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CustomerId"] = new SelectList(_context.Customer, "Id", "Id", booking.CustomerId);
+            ViewData["PackageId"] = new SelectList(_context.Packages, "Id", "Id", booking.PackageId);
             return View(booking);
         }
 
@@ -125,6 +136,8 @@ namespace Tourist_Agency_MVC.Controllers
             }
 
             var booking = await _context.Booking
+                .Include(b => b.Customer)
+                .Include(b => b.package)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (booking == null)
             {
